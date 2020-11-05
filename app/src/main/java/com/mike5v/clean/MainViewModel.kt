@@ -1,5 +1,6 @@
 package com.mike5v.clean
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,17 +9,19 @@ import com.mike5v.data.CatsRepository
 import com.mike5v.domain.CatsUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val api = RetrofitCatsApi()
     private val repository = CatsRepository(api)
     private val useCase = CatsUseCase(repository)
 
-    val success = MutableLiveData<String>()
+    private val mutableSuccess = MutableLiveData<String>()
+    val success: LiveData<String>
+        get() = mutableSuccess
 
     fun fetch() {
         viewModelScope.launch {
-            success.postValue(useCase.getCatUrlImage())
+            mutableSuccess.postValue(useCase.getCatUrlImage())
         }
     }
 }
