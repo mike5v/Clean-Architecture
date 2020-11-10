@@ -47,7 +47,7 @@ class ApiTest {
 
         assertEquals(1, cats.size)
         assertEquals("GET", request.method)
-        assertEquals(request.path, "/images/search")
+        assertEquals("/images/search", request.path)
         assertEquals("blp", cats.first().id)
         assertEquals("https://cdn2.thecatapi.com/images/blp.jpg", cats.first().url)
     }
