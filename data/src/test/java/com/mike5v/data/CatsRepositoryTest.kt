@@ -8,7 +8,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-class CatsRepositoryTests {
+class CatsRepositoryTest {
 
     private val service: CatsServices = mockk()
     private val repository = CatsRepository(service)
