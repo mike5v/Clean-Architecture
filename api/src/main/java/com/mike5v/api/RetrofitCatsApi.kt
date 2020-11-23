@@ -1,7 +1,7 @@
 package com.mike5v.api
 
+import com.mike5v.data.Cat
 import com.mike5v.data.CatsServices
-import com.mike5v.domain.Cat
 
 class RetrofitCatsApi: CatsServices {
 

@@ -1,4 +1,4 @@
-package com.mike5v.domain
+package com.mike5v.data
 
 data class Cat (
     val id: String,
