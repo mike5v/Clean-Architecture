@@ -12,5 +12,5 @@ import dagger.hilt.components.SingletonComponent
 object ServiceModule {
 
     @Provides
-    fun provideDatabase(): CatsServices = RetrofitCatsApi()
+    fun provideService(): CatsServices = RetrofitCatsApi()
 }
