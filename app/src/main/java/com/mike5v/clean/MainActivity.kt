@@ -5,34 +5,34 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.mike5v.clean.databinding.ActivityMainBinding
 import com.mike5v.clean.vm.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), RequestListener<Drawable> {
 
     private val viewmodel: MainViewModel by viewModels()
+    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         viewmodel.fetch()
 
         viewmodel.success.observe(this, {
-            Glide.with(this).load(it).listener(this).into(cat)
+            Glide.with(this).load(it).listener(this).into(binding.cat)
         })
 
-        button.setOnClickListener {
-            cat.visibility = View.GONE
-            progressBar.visibility = View.VISIBLE
+        binding.button.setOnClickListener {
+            binding.cat.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
             viewmodel.fetch()
         }
     }
@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity(), RequestListener<Drawable> {
         dataSource: DataSource?,
         isFirstResource: Boolean
     ): Boolean {
-        progressBar.visibility = View.GONE
-        cat.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
+        binding.cat.visibility = View.VISIBLE
         return false
     }
 
