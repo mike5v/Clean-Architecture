@@ -1,4 +1,4 @@
-package com.mike5v.clean.matchers
+package com.mike5v.clean.utils.matchers
 
 import android.view.View
 import android.widget.ImageView

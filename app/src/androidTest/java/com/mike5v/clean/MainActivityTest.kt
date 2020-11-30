@@ -1,16 +1,11 @@
-package com.mike5v.clean.activity
+package com.mike5v.clean
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isClickable
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import assertk.assert
-import com.mike5v.clean.MainActivity
-import com.mike5v.clean.R
-import com.mike5v.clean.matchers.isImageLoaded
+import com.mike5v.clean.utils.matchers.isImageLoaded
 import com.mike5v.data.CatsRepository
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
