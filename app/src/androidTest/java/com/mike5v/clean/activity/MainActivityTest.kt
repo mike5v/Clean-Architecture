@@ -3,9 +3,14 @@ package com.mike5v.clean.activity
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isClickable
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import assertk.assert
 import com.mike5v.clean.MainActivity
 import com.mike5v.clean.R
+import com.mike5v.clean.matchers.isImageLoaded
 import com.mike5v.data.CatsRepository
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -25,14 +30,17 @@ class MainActivityTest {
     val repository: CatsRepository = mockk()
 
     @Test
-    fun changeCatImageOnButtonClik() {
+    fun changeCatImageOnButtonClick() {
         coEvery { repository.getCatUrlImage() } returns "https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg"
 
         ActivityScenario.launch(MainActivity::class.java)
+
+        onView(withId(R.id.cat)).check(matches(isImageLoaded()))
 
         coEvery { repository.getCatUrlImage() } returns "https://images.theconversation.com/files/350865/original/file-20200803-24-50u91u.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop"
 
         onView(withId(R.id.button)).perform(ViewActions.click())
 
+        onView(withId(R.id.cat)).check(matches(isImageLoaded()))
     }
 }

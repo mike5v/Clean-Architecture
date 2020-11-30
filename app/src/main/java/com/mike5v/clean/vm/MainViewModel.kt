@@ -19,7 +19,7 @@ class MainViewModel @ViewModelInject constructor(repository: CatsRepository) : V
 
     fun fetch() {
         viewModelScope.launch {
-            mutableSuccess.postValue(useCase.getCatUrlImage())
+            mutableSuccess.postValue(useCase.execute())
         }
     }
 }

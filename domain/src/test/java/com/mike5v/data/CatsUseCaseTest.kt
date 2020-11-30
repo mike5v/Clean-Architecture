@@ -18,7 +18,7 @@ class CatsUseCaseTest {
     fun `cat usecase test`() = runBlocking {
         coEvery { repository.getCatUrlImage() } returns "https://images-na.ssl-images-amazon.com/images/I/41y16B5C6rL._SX311_BO1,204,203,200_.jpg"
 
-        val url = useCase.getCatUrlImage()
+        val url = useCase.execute()
 
         assert(url).isEqualTo("https://images-na.ssl-images-amazon.com/images/I/41y16B5C6rL._SX311_BO1,204,203,200_.jpg")
     }

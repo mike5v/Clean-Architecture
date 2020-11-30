@@ -1,6 +1,6 @@
 package com.mike5v.domain
 
-class CatsUseCase(private val catsRepository: CatsRepository) {
+class CatsUseCase(private val catsRepository: CatsRepository): Executor<String> {
 
-    suspend fun getCatUrlImage() = catsRepository.getCatUrlImage()
+    override suspend fun execute() = catsRepository.getCatUrlImage()
 }
