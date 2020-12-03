@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -26,8 +27,8 @@ class MainActivity : AppCompatActivity(), RequestListener<Drawable> {
 
         viewmodel.fetch()
 
-        viewmodel.success.observe(this, {
-            Glide.with(this).load(it).listener(this).into(binding.cat)
+        viewmodel.success.observe(this, Observer { url ->
+            Glide.with(this).load(url).listener(this).into(binding.cat)
         })
 
         binding.button.setOnClickListener {
