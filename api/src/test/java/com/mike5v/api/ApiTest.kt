@@ -1,21 +1,23 @@
 package com.mike5v.api
 
 import com.mike5v.api.utils.Response
+import io.mockk.coEvery
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import retrofit2.Retrofit
 import java.net.HttpURLConnection
 
 class ApiTest {
 
-    private val catsApi: CatsApi by lazy {
-        Network.createService(baseUrl = mockWebServer.url("/").toString(), service = CatsApi::class.java)
-    }
-
     private val mockWebServer = MockWebServer()
+
+    private val retrofit by lazy { Network.provideRetrofit(mockWebServer.url("/").toString()) }
+    private val catsApi by lazy { Network.provideCatsApi(retrofit) }
 
     @Before
     fun setup() {
